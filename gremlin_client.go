@@ -7,7 +7,7 @@ import (
 	"regexp"
 	"time"
 
-	"github.com/cbinsights/gremlin/lock"
+	"github.com/MediaMath/gremlin/lock"
 )
 
 type GremlinClient struct {

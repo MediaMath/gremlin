@@ -6,7 +6,7 @@ import (
 
 	"github.com/opentracing/opentracing-go"
 
-	"github.com/cbinsights/gremlin/lock"
+	"github.com/MediaMath/gremlin/lock"
 )
 
 type Gremlin_i interface {
