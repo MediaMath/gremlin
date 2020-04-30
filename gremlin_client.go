@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"net"
+	"reflect"
 	"regexp"
 	"time"
 
@@ -173,8 +174,19 @@ func runMonitorTilQuit(ctx context.Context, quit, done chan struct{}, ticker *ti
 }
 
 func closeClient(client GoGremlin) error {
-	if client == nil {
+	if isNil(client)  {
 		return nil
 	}
 	return client.Close()
+}
+
+func isNil(i interface{}) bool {
+	if i == nil {
+		return true
+	}
+	switch reflect.TypeOf(i).Kind() {
+	case reflect.Ptr, reflect.Map, reflect.Array, reflect.Chan, reflect.Slice:
+		return reflect.ValueOf(i).IsNil()
+	}
+	return false
 }
