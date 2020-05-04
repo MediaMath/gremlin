@@ -36,6 +36,10 @@ func NewGremlinConnection(urlStr string, options ...OptAuth) (*GremlinConnection
 		return nil, err
 	}
 	dialer := websocket.Dialer{}
+	// ReadBufferSize and WriteBufferSize specify I/O buffer sizes in bytes.
+	// The write size is the max supported size for AWS neptune
+	dialer.WriteBufferSize = 1024 * 1024 * 149
+	dialer.ReadBufferSize = 1024 * 1024 * 149
 	ws, _, err := dialer.Dial(urlStr, http.Header{})
 	if err != nil {
 		return nil, err
